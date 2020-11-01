@@ -1,4 +1,4 @@
-package com.blogspot.yourfavoritekaisar.movieapp.model
+package com.blogspot.yourfavoritekaisar.movieapp.data
 
 import com.google.gson.annotations.SerializedName
 

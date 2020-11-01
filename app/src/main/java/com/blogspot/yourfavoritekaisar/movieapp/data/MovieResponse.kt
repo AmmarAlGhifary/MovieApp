@@ -1,6 +1,5 @@
-package com.blogspot.yourfavoritekaisar.movieapp.model
+package com.blogspot.yourfavoritekaisar.movieapp.data
 
-import com.blogspot.yourfavoritekaisar.movieapp.model.Movie
 import com.google.gson.annotations.SerializedName
 
 data class MovieResponse(
