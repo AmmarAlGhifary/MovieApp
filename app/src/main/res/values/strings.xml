@@ -8,4 +8,6 @@
     <string name="highest_rated_movies">Highest rated movies of all time</string>
     <string name="upcoming">Upcoming</string>
     <string name="stay_updated">Stay updated with the latest movies</string>
+    <string name="movie_backdrop">Movie Backdrop</string>
+    <string name="movie_poster">Movie Poster</string>
 </resources>

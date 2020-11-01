@@ -1,5 +1,6 @@
 package com.blogspot.yourfavoritekaisar.movieapp.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -9,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blogspot.yourfavoritekaisar.movieapp.R
 import com.blogspot.yourfavoritekaisar.movieapp.adapter.MovieAdapter
 import com.blogspot.yourfavoritekaisar.movieapp.data.Movie
-import com.blogspot.yourfavoritekaisar.movieapp.data.rep.MovieRepository
-import com.blogspot.yourfavoritekaisar.movieapp.data.rep.MovieRepository.getUpcomingMovies
+import com.blogspot.yourfavoritekaisar.movieapp.data.MovieRepository
+import com.blogspot.yourfavoritekaisar.movieapp.data.MovieRepository.getUpcomingMovies
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,20 +42,18 @@ class MainActivity : AppCompatActivity() {
         popularMovies = findViewById(R.id.rv_popular_movies)
         popularMoviesLayoutMgr = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         popularMovies.layoutManager = popularMoviesLayoutMgr
-        popularMoviesAdapter = MovieAdapter(mutableListOf())
-        popularMoviesAdapter = popularMoviesAdapter
+        popularMoviesAdapter = MovieAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
 
         getTopRatedMovies()
         topRatedMovies = findViewById(R.id.rv_top_rated_movies)
         topRatedMoviesLayoutMgr = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        topRatedMoviesAdapter = MovieAdapter(mutableListOf())
-        topRatedMoviesAdapter = topRatedMoviesAdapter
+        topRatedMoviesAdapter = MovieAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
 
         getUpcomingMovies()
         upcomingMovies = findViewById(R.id.rv_upcoming_movies)
         upcomingMoviesLayoutMgr = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         upcomingMovies.layoutManager = upcomingMoviesLayoutMgr
-        upcomingMoviesAdapter = MovieAdapter(mutableListOf())
+        upcomingMoviesAdapter = MovieAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
         upcomingMovies.adapter = upcomingMoviesAdapter
     }
 
@@ -171,10 +170,15 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun showMovieDetails(movie: Movie) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(MOVIE_BACKDROP, movie.backdropPath)
+        intent.putExtra(MOVIE_POSTER, movie.posterPath)
+        intent.putExtra(MOVIE_TITLE, movie.title)
+        intent.putExtra(MOVIE_RATING, movie.rating)
+        intent.putExtra(MOVIE_RELEASE_DATE, movie.releaseDate)
+        intent.putExtra(MOVIE_OVERVIEW, movie.overview)
+        startActivity(intent)
+    }
+
 }
-
-
-//        MovieRepository.getPopularMovies(
-//            onSuccess = ::onPopularMoviesFetched,
-//            onError = ::onError
-//        )

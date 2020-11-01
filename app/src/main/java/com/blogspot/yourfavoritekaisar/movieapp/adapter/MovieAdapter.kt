@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 
 //Kita make Mutable list agar pemanggilan data lebih dinamis
-class MovieAdapter(private var movies: MutableList<Movie>) :
+class MovieAdapter(private var movies: MutableList<Movie>, private var onMovieClick: (movie: Movie) -> Unit) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,10 +35,10 @@ class MovieAdapter(private var movies: MutableList<Movie>) :
         )
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val poster: ImageView = itemView.findViewById(R.id.item_movie_poster)
-
         fun bind(movie: Movie) {
+            itemView.setOnClickListener { onMovieClick.invoke(movie) }
             Glide.with(itemView)
                 .load("https://image.tmdb.org/t/p/w342${movie.posterPath}")
                 .transform(CenterCrop())

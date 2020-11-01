@@ -1,8 +1,5 @@
-package com.blogspot.yourfavoritekaisar.movieapp.data.rep
+package com.blogspot.yourfavoritekaisar.movieapp.data
 
-import com.blogspot.yourfavoritekaisar.movieapp.data.Api
-import com.blogspot.yourfavoritekaisar.movieapp.data.Movie
-import com.blogspot.yourfavoritekaisar.movieapp.data.MovieResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
